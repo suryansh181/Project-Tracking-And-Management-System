@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+{% block head %}
+<title>Team</title>
+{% endblock head %}
+
+{% block body %}
+<!--====================== Team List ================================-->
+{% if project_id %}
+<div class="container">
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row gutters-sm">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Memebers</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>mark@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>jaocb@gmail</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form>
+                    <div class="form-row align-items-center">
+                        <div class="col-sm-3 my-1">
+                            <label class="sr-only" for="inlineFormInputEmail">ADD USER</label>
+                            {% if form.email.errors %}
+                            {{ form.email(placeholder=form.email.label.text, class="is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.email(placeholder=form.email.label.text ) }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-auto my-1">
+                        {{ form.submit(class="btn btn-outline-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div style="height: 100vh">
+    <div class="card h-100 card-body">
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>Error!</strong> To view Team, First choose a Project.
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock body %}

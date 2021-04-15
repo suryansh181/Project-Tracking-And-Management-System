@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block head %}
+<title>Invite</title>
+{% endblock head %}
+
+{% block body %}
+<!--====================== Invite ================================-->
+<div class="container">
+    <div class="child">
+        <div class="card  text border-dark">
+            <div class="card-body d-grid gap-5">
+                <h3 class=" text mb-3">Invite New Members</h3>
+                <form method="POST">
+                    <div class="mb-3 ">
+                        <i class='bx bx-mail-send'></i>
+                            <label for="exampleInputEmail1">Invite With Email</label>
+                            <br>
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit"  class="btn-lg btn-outline-primary" type="button">Invite</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
