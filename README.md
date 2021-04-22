@@ -6,3 +6,4 @@ To Start Webapp:
         python run.py
         
 Rest is self explainatory
+Check Documentation for more detailed information.
