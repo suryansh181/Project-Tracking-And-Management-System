@@ -4,9 +4,11 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request,session
 from managment import app, db, bcrypt, mail
 from managment.form import RegistrationForm, LoginForm, UpdateAccountForm, ProjectForm,TaskForm,TeamForm
-from managment.models import User, Project,Task
+from managment.models import User, Project,Task,works
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message, Mail
+
+
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -183,11 +185,22 @@ def delete_task(task_id):
 @app.route("/team/<int:project_id>",methods=['GET', 'POST'])
 @login_required
 def team(project_id = None):
+    session['project_id'] = project_id
+    project = Project.query.filter(Project.id == project_id).first()
+    if project_id:
+        users = db.session.query(User.username, User.email).filter(works.c.user_id == User.id).filter(works.c.project_id == project.id).all()
+    else:
+        users= None
     form = TeamForm()
     if form.validate_on_submit():
         email_id = form.email.data
-        return redirect(url_for('team', project_id=project_id))
-    return render_template('team.html',form=form, project_id=project_id)
+        user = User.query.filter(User.email == email_id).first()
+        # w = works(user_id=user.id, project_id=project_id)
+        stmnt = works.insert().values(user_id=user.id, project_id=project_id)
+        db.session.execute(stmnt) 
+        db.session.commit()
+        return redirect(url_for('team',project_id=project_id))
+    return render_template('team.html',form=form,users=users, project_id=project_id)
 
 @app.route("/message", methods=['GET', 'POST'])
 @login_required
