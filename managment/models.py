@@ -6,7 +6,7 @@ from flask_login import UserMixin
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-workson = db.Table('works',
+works = db.Table('works',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('project_id', db.Integer, db.ForeignKey('project.id'))
 )
@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     Projects = db.relationship('Project', backref='creator', lazy=True)
-    works=db.relationship('Project',secondary= workson,backref=db.backref('onproject',lazy=True))
+    work=db.relationship('Project',secondary= works,backref=db.backref('onproject',lazy=True))
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
