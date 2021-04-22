@@ -4,3 +4,5 @@ After installing requirements
 
 To Start Webapp:
         python run.py
+        
+Rest is self explainatory
