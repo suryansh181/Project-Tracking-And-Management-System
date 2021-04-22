@@ -7,4 +7,4 @@ To Start Webapp:
         
 Rest is self explainatory.
 
-Check Out Documentation for more detailed information.
+Check Out Documentation for detailed information.
