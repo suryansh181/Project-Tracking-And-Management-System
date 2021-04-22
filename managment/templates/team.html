@@ -19,19 +19,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for user in users %}
                         <tr>
                             <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>mark@mdo</td>
+                            <td>{{user.username}}</td>
+                            <td>{{user.email}}</td>
                         </tr>
-                        <tr>
+                        {% endfor %}
+                        <!-- <tr>
                             <th scope="row">2</th>
                             <td>Jacob</td>
                             <td>jaocb@gmail</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
-                <form>
+                <form method="POST" >
+                    {{ form.hidden_tag() }}
                     <div class="form-row align-items-center">
                         <div class="col-sm-3 my-1">
                             <label class="sr-only" for="inlineFormInputEmail">ADD USER</label>
